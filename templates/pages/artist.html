@@ -1,0 +1,34 @@
+<div id="artist">
+	<div id="header">
+		<div id="header-top"></div>
+		<div id="header-bottom">
+			<div id="artist-pres">
+				<div id="picture-artist">
+					<img :src="data.picture_medium" alt="">
+				</div>
+				<div id="picture-side">
+					<div id="picture-side-top">
+						<h1>{{ data.name }}</h1>
+						<span>{{ data.nb_fan }} fans, {{ data.nb_album }} albums</span>
+					</div>
+					<div id="picture-side-bottom">
+						<div @click="">
+							<span class="fa fa-heart"></span>
+							<span class="fa fa-heart-o"></span>
+							<span>Ajouter</span>
+						</div>
+						<div>
+							Partager
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<tabs-menu headers="discographie, top-titres, artistes-similaires">
+		<discographie slot="discographie" key="1"></discographie>
+		<top-titres slot="top-titres" key="1"></top-titres>
+		<artistes-similaires slot="artistes-similaires" key="1"></artistes-similaires>
+	</tabs-menu>
+	<div id="tracks"></div>
+</div>

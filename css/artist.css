@@ -1,0 +1,95 @@
+#artist {
+	--header-size: 500px;
+	--header-top-size : 300px;
+	--photo-diam: 200px;
+	--header-bottom-size : calc(var(--photo-diam) / 2);
+}
+#header {
+	display: grid;
+	height: var(--header-size);
+	grid-template-rows: var(--header-top-size) var(--header-bottom-size); 
+}
+#header-top {
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	position: relative;
+	/* Set this div to pos: rel give it a stacking context.
+	To cancel any side effect, let set it's z-index to -1 */
+	z-index: -1;
+
+}
+/*
+	That's a layer to be sure that
+	white font will always be seeable
+ */
+#header-top:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(35, 35, 35, 0.6);
+}
+#header-bottom {
+	display: flex;
+	justify-content: center;
+	-ms-align-items: flex-end;
+	align-items: flex-end;
+}
+#artist-pres {
+	--width: 500px;
+	width: var(--width);
+    display: grid;
+    grid-template-columns: var(--photo-diam) 1fr;
+    grid-template-rows: var(--photo-diam);
+}
+#picture-artist > img {
+	border-radius: 50%;
+	height: var(--photo-diam);
+	width: var(--photo-diam);
+}
+#picture-side {
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	grid-template-columns: 1fr;
+	padding-left: 2rem;
+}
+#picture-side-top {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+	justify-content: center;
+
+	color: #fff;
+}
+#picture-side-bottom {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+#picture-side-bottom > div {
+    padding: 0.5rem 1rem;
+    margin-right: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .5s;
+}
+#picture-side-bottom > div:hover {
+    background-color: #fff;
+}

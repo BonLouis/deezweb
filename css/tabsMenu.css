@@ -1,0 +1,61 @@
+.tab-animation-enter-active, .tab-animation-leave-active {
+	transition : opacity 0.5s;
+}
+.tab-animation-enter, .tab-animation-leave-to {
+	opacity: 0;
+}
+.tab-animation-enter, .tab-animation-leave {
+	position: absolute;
+}
+#tabs-menu {
+	
+	--height-after: 2px;
+	--bg-after-ul: #f8f8f8;
+	--bg-after-li: #00a6ff;
+	--pad-li-side: 1rem;
+}
+#tabs-titles {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: flex-start;
+	-ms-align-items: center;
+	align-items: center;
+}
+#tabs-titles, #tabs-titles li {
+	position: relative;
+}
+#tabs-titles li {
+	padding: var(--pad-li-side) calc(var(--pad-li-side) * 1.5);
+	margin-bottom: var(--height-after);
+	cursor: pointer;
+}
+#tabs-titles::after, #tabs-titles li::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	height: var(--height-after);
+}
+#tabs-titles::after {
+	left: 0;
+	right: 0;
+	background-color: var(--bg-after-ul);	
+}
+#tabs-titles li::after {
+	right: 100%;
+	left: var(--pad-li-side);
+	background-color: var(--bg-after-li);
+	transition: right .3s ease-out;
+}
+#tabs-titles li:hover::after {
+	right: var(--pad-li-side);
+}
+#tabs-titles li.active::after {
+	right: var(--pad-li-side);
+}
+
+#tabs-menu > section > *{
+	position: absolute;
+}

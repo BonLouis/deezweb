@@ -1,0 +1,8 @@
+<div id="tabs-menu">
+	<ul id="tabs-titles">
+		<li v-for="title in titles" :class="{active: title === activeTab}" @click="showTab(title)"> {{ title | toUp }} </li>
+	</ul>
+	<transition-group name="tab-animation" tag="section" mode="out-in">
+		<slot v-for="title in titles" :name="title" v-if="title === activeTab"></slot>
+	</transition-group>
+</div>

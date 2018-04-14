@@ -1,0 +1,11 @@
+<div class="wrapper">
+	<div id="search-results">
+		<h1 id="results-for" v-if="allResults.total">Résultats de recherche pour «{{ search }}»</h1>
+		
+		<tabs-menu headers="tout artistes albums">
+			<tout :res="allResults.all" slot="tout" key="a"></tout>
+			<artistes :res="allResults.artists" slot="artistes" key="b"></artistes>
+			<albums :res="allResults.albums" slot="albums" key="c"></albums>
+		</tabs-menu>
+	</div>
+</div>

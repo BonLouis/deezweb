@@ -1,0 +1,16 @@
+{
+  "name": "api-deezer-exercice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Louis",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^2.5.13",
+    "vue-router": "^3.0.1"
+  },
+  "devDependencies": {
+    "fetch-jsonp": "^1.1.3"
+  }
+}

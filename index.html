@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="css/main.css">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		
+		<title>Recherche</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="node_modules/vue/dist/vue.js"></script>
+		<script src="node_modules/vue-router/dist/vue-router.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div id="loader-wrapper" v-if="loading">
+				<div id="loader"></div>
+			</div>
+			<nav>
+				<div id="nav-wrapper">
+					<ul>
+						<li>
+							<router-link to="/">Deezweb</router-link>
+						</li>
+						<li>
+							<form @submit.prevent="goSearch">
+								<input type="text" placeholder="Rechercher" v-model="quickSearchInput">
+							</form>
+							<!-- <router-link to="/search/">Recherche</router-link> -->
+						</li>
+						<li>
+							<router-link to="/favs">Mes favoris</router-link>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			
+			<transition name="components" mode="out-in">
+				<router-view>
+				</router-view>
+			</transition>
+		</div>
+		<script src="node_modules/fetch-jsonp/build/fetch-jsonp.js"></script>
+		<script type="module" src="main.js"></script>
+	</body>
+</html>

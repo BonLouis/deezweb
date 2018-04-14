@@ -1,0 +1,117 @@
+<div class="wrapper">
+	<div id="search-wrapper">
+		<!-- <div id="search-box">
+			<form v-if="!searchMode" id="fast" @submit.prevent="updateRoute">
+				<select v-model="orderInput" @change="updateRoute">
+					<option value="" disabled selected>Classer par...</option>
+					<option value="ranking">Les mieux notées</option>
+					<option value="artist_asc">Artiste (croissant)</option>
+					<option value="artist_desc">Artiste (décroissant)</option>
+					<option value="track_asc">Musique (croissant)</option>
+					<option value="track_desc">Musique (décroissant)</option>
+					<option value="album_asc">Album (croissant)</option>
+					<option value="album_desc">Album (décroissant)</option>
+					<option value="rating_asc">Note (croissant)</option>
+					<option value="rating_desc">Note (décroissant)</option>
+					<option value="duration_asc">Durée (croissant)</option>
+					<option value="duration_desc">Durée (décroissant)</option>
+				</select>
+				<input v-model="searchInput" placeholder="Recherche rapide" type="text" autofocus>
+				<button>Rechercher</button>
+			</form>
+			<form v-else id="advanced" @submit.prevent="updateRoute">
+				<div>
+					<label for="advanced-artist" value="artist">Artiste</label>
+					<input v-model="advancedSearch.artist" type="text" id="advanced-artist">
+				</div>
+				<div>
+					<label for="advanced-album" value="album">Album</label>
+					<input v-model="advancedSearch.album" type="text" id="advanced-album">
+				</div>
+				<div>
+					<label for="advanced-track" value="track">Musique</label>
+					<input v-model="advancedSearch.track" type="text" id="advanced-track">
+				</div>
+				<div>
+					<label for="advanced-label" value="label">Label</label>
+					<input v-model="advancedSearch.label" type="text" id="advanced-label">
+				</div>
+				<div>
+					<label for="advanced-dur_min" value="dur_min">Durée minimale</label>
+					<input v-model="advancedSearch.dur_min" type="text" id="advanced-dur_min">
+				</div>
+				<div>
+					<label for="advanced-dur_max" value="dur_max">Durée maximale</label>
+					<input v-model="advancedSearch.dur_max" type="text" id="advanced-dur_max">
+				</div>
+				<div>
+					<label for="advanced-bpm_min" value="bpm_min">BPM minimal</label>
+					<input v-model="advancedSearch.bpm_min" type="text" id="advanced-bpm_min">
+				</div>
+				<div>
+					<label for="advanced-bpm_max" value="bpm_max">BPM maximal</label>
+					<input v-model="advancedSearch.bpm_max" type="text" id="advanced-bpm_max">
+				</div>
+				<div>
+					<button>Lancer la recherche</button>
+				</div>
+			</form>
+			<div id="search-mode">
+				<span v-if="!searchMode" @click="searchMode = !searchMode">Faire une recherche avancée</span>
+				<span v-else @click="searchMode = !searchMode">Faire une recherche rapide</span>
+			</div>
+		</div> -->
+	</div>
+	<div id="search-results">
+		<h1 id="results-for" v-if="allResults.total">Résultats de recherche pour «{{search | inCaseOfAdvancedSearch($route)}}»</h1>
+		
+		<tabs-menu headers="tout artistes albums">
+			<ul slot="tout" key="tout" id="results">
+				<li class="grid-for-search">
+					<div id="header-title">
+						<h3>Titre</h3>
+					</div>
+					<div id="header-artist">
+						<h3>Artiste</h3>
+					</div>
+					<div id="header-album">
+						<h3>Album</h3>
+					</div>
+					<div id="header-duration">
+						<h3>Dur.</h3>
+					</div>
+					<div id="header-popularité">
+						<h3>Pop.</h3>
+					</div>
+				</li>
+				<li class="grid-for-search" v-for="data in allResults.data">
+					<div>
+						<img :src="data.album.cover_small" class="search-cover-img" alt="">
+					</div>
+					<div class="fav-heart">
+						<transition name="heart-fav" mode="out-in">
+							<i key="1" v-if="`#${data.id}` in $root.favs" class="fa fa-heart " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
+							<i key="2" v-else class="fa fa-heart-o " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
+						</transition>
+					</div>
+					<div class="ellipsis">
+						<router-link class="title-link" :to="'/track/' + data.id">{{ data.title_short | shorten(30) }}</router-link>
+					</div>
+					<div class="ellipsis">
+						<router-link class="artist-link" :to="'/artist/' + data.artist.id">{{ data.artist.name | shorten(30) }}</router-link>
+					</div>
+					<div class="ellipsis">
+						<router-link class="album-link" :to="'/album/' + data.album.id">{{ data.album.title | shorten(30) }}</router-link>
+					</div>
+					<div class="ellipsis">
+						<span class="duration">{{ data.duration | duration }}</span>
+					</div>
+					<div class="ellipsis">
+						<span class="popularity">#####</span>
+					</div>
+				</li>
+			</ul>
+			<div slot="artistes" key="artistes"><p>Coucou</p></div>
+		</tabs-menu>
+	</div>
+</div>

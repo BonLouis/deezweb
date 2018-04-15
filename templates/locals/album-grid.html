@@ -1,4 +1,4 @@
-<div id="discographie" >
+<div id="results-for-albums" >
 	<p> {{ albums.total }} albums</p>
 
 	<ul class="flex flex-wrap">
@@ -8,7 +8,8 @@
 					<img :src="album.cover_medium" alt="" class="radius-5px">
 					<figcaption>
 						<h2>{{ album.title }}</h2>
-						<h3 class="tal">par {{ album.artist.name }}</h3>
+						<h3 v-if="album.artist" class="tal">par {{ album.artist.name }}</h3>
+						<p v-if="release">Sorti le {{ album.release_date }}</p>
 					</figcaption>
 				</figure>
 			</router-link>

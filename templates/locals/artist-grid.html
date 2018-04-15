@@ -1,0 +1,16 @@
+<div>
+	<p>{{ artists.total }} artistes</p>
+	<ul id="search-for-artists" class="flex flex-wrap tac">
+		<li v-for="artist in artists.data">
+			<router-link :to="'/artist/' + artist.id">
+				<figure>
+					<img :src="artist.picture_medium" alt="" class="radius-50pc">
+					<figcaption>
+						<h2>{{ artist.name }}</h2>
+						<h3>{{ artist.nb_fan.toLocaleString() }} fans</h3>
+					</figcaption>
+				</figure>
+			</router-link>
+		</li>
+	</ul>
+</div>

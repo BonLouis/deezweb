@@ -4,12 +4,12 @@
 		<div id="header-bottom">
 			<div id="artist-pres">
 				<div id="picture-artist">
-					<img :src="data.picture_medium" alt="">
+					<img :src="artist.picture_medium" alt="">
 				</div>
 				<div id="picture-side">
 					<div id="picture-side-top">
-						<h1>{{ data.name }}</h1>
-						<span>{{ data.nb_fan }} fans, {{ data.nb_album }} albums</span>
+						<h1>{{ artist.name }}</h1>
+						<span>{{ artist.nb_fan }} fans, {{ artist.nb_album }} albums</span>
 					</div>
 					<div id="picture-side-bottom">
 						<div @click="">
@@ -26,9 +26,9 @@
 		</div>
 	</div>
 	<tabs-menu headers="discographie, top-titres, artistes-similaires">
-		<discographie slot="discographie" key="1"></discographie>
-		<top-titres slot="top-titres" key="1"></top-titres>
-		<artistes-similaires slot="artistes-similaires" key="1"></artistes-similaires>
+		<album-grid :albums="albums" :release="true" slot="discographie" key="1"></album-grid>
+		<track-grid :tracks="tops" slot="top-titres" key="1"></track-grid>
+		<artist-grid :artists="similars" slot="artistes-similaires" key="1"></artist-grid>
 	</tabs-menu>
 	<div id="tracks"></div>
 </div>

@@ -1,9 +1,12 @@
+import { mixins } from '../../js/utils.js';
+
 export default Vue.component('tabs-menu', (resolve, reject) => {
 	fetch('../templates/globals/tabsMenu.html')
 		.then(res => res.text())
 		.then((template) => {
 			resolve({
 				name: 'tabs-menu',
+				mixins: [mixins],
 				props: ['headers'],
 				data: function () {
 					return {

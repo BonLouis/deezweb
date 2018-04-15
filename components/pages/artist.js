@@ -1,4 +1,4 @@
-import { artistUrl } from '../../js/utils.js';
+import { mixins, artistUrl } from '../../js/utils.js';
 // import Discographie from '../locals/discographie.js';
 // debugger;
 export default Vue.component('Artist', (resolve) => {
@@ -7,48 +7,72 @@ export default Vue.component('Artist', (resolve) => {
 		.then((template) => {
 			resolve({
 				name: 'artist',
+				mixins: [mixins],
 				props: ['id'],
 				data: function () {
 					return {
 						baseUrl: artistUrl,
-						data: {},
-						bests: {},
+						url: '',
+						artist: {},
+						tops: {},
+						albums: {},
+						similars: {},
 						limit: 20
 					};
 				},
 				created() {
-					this.loadArtist();
-					this.$root.injectCss('artist');
-				},
-				destroyed() {
-					this.$root.ejectCss();
+					this.loadAll();
 				},
 				watch: {
-					bests: function () {
+					tops: function () {
 						const headerTop = document.querySelector('#header-top');
 						// const pickATrack = Math.random() * this.limit >> 0;
-						// headerTop.style.backgroundImage = `url(${this.bests.data[pickATrack].album.cover_big})`;
-						headerTop.style.backgroundImage = `url(${this.bests.data[0].album.cover_xl})`;
+						// headerTop.style.backgroundImage = `url(${this.top.data[pickATrack].album.cover_big})`;
+						headerTop.style.backgroundImage = `url(${this.tops.data[0].album.cover_xl})`;
 					}
 				},
 				methods: {
+					loadAll() {
+						this.loadArtist();
+						this.loadTop();
+						this.loadAlbums();
+						this.loadSimilars();
+					},
 					loadArtist() {
-						let fullSearch = '';
-						fullSearch = this.baseUrl.replace('query', this.id);
-						fetchJsonp(fullSearch)
-							.then(data => data.json())
-							.then((data) => {
-								this.data = data;
-								this.loadBests();
-								// this.getLastAlbum();
+						this.url = this.baseUrl.replace('query', this.id);
+						console.log(this.url);
+						fetchJsonp(this.url)
+							.then(artist => artist.json())
+							.then((artist) => {
+								this.artist = artist;
 							});
 					},
-					loadBests() {
-						const url = (`${this.data.tracklist}&output=jsonp`).replace('limit=50', `limit=${this.limit}`);
+					loadTop() {
+						const url = this.url.replace(/\?/, `/top?limit=${this.limit}&`);
+						console.log(url);
+
 						fetchJsonp(url)
-							.then(data => data.json())
-							.then((data) => {
-								this.bests = data;
+							.then(tops => tops.json())
+							.then((tops) => {
+								this.tops = tops;
+							});
+					},
+					loadAlbums() {
+						const url = this.url.replace(/\?/, '/albums&');
+						console.log(url);
+						fetchJsonp(url)
+							.then(albums => albums.json())
+							.then((albums) => {
+								this.albums = albums;
+							});
+					},
+					loadSimilars() {
+						const url = this.url.replace(/\?/, '/related&');
+						console.log(url);
+						fetchJsonp(url)
+							.then(similars => similars.json())
+							.then((similars) => {
+								this.similars = similars;
 							});
 					},
 				},
@@ -57,36 +81,7 @@ export default Vue.component('Artist', (resolve) => {
 				 * Locals components
 				 */
 				components: {
-					discographie: resolveDisc => fetch('../templates/locals/discographie.html')
-						.then(disc => disc.text())
-						.then(disc => resolveDisc({
-							template: disc,
-							data: function () {
-								return {
-									title: 'Discooo'
-								};
-							}
-						})),
-					'top-titres': resolveTop => fetch('../templates/locals/top-titres.html')
-						.then(top => top.text())
-						.then(top => resolveTop({
-							template: top,
-							data: function () {
-								return {
-									title: 'Zetop'
-								};
-							}
-						})),
-					'artistes-similaires': resolveSim => fetch('../templates/locals/artistes-similaires.html')
-						.then(sim => sim.text())
-						.then(sim => resolveSim({
-							template: sim,
-							data: function () {
-								return {
-									title: 'Likely'
-								};
-							}
-						})),
+					
 				}
 			});
 		});

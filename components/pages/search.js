@@ -1,17 +1,28 @@
-import { searchUrl, isAnEmptyObject } from '../../js/utils.js';
+import {
+	searchAllUrl,
+	searchArtistUrl,
+	searchAlbumUrl,
+	mixins,
+	isAnEmptyObject
+} from '../../js/utils.js';
 
 export default Vue.component('Home', (resolve, reject) => {
 	fetch('../templates/pages/search.html')
 		.then(data => data.text())
 		.then(template => resolve({
 			name: 'search',
+			mixins: [mixins],
 			props: ['favs', 'search', 'order', 'query'],
 			data: function () {
 				return {
 					searchInput: '',
 					filterInput: '',
 					orderInput: '',
-					baseUrl: searchUrl,
+					urls: {
+						searchAllUrl,
+						searchArtistUrl,
+						searchAlbumUrl
+					},
 					allResults: {
 						all: {},
 						artists: {},
@@ -59,9 +70,9 @@ export default Vue.component('Home', (resolve, reject) => {
 						// I've decided to upperCase the order directly in the request,
 						// because I find it ugly in capital in the url.
 						// Yep.
-						fullSearch = this.baseUrl.replace('query', `${search}&order=${order.toUpperCase()}`);
+						fullSearch = this.urls.searchAllUrl.replace('query', `${search}&order=${order.toUpperCase()}`);
 					} else {
-						fullSearch = this.baseUrl.replace('query', `${search}`);
+						fullSearch = this.urls.searchAllUrl.replace('query', `${search}`);
 					}
 					console.log(fullSearch);
 					fetchJsonp(fullSearch)
@@ -75,9 +86,9 @@ export default Vue.component('Home', (resolve, reject) => {
 					const order = this.checkOrder();
 					let fullSearch = '';
 					if (order) {
-						fullSearch = this.baseUrl.replace('query', `artist:"${search}"&order=${order.toUpperCase()}`);
+						fullSearch = this.urls.searchArtistUrl.replace('query', `${search}&order=${order.toUpperCase()}`);
 					} else {
-						fullSearch = this.baseUrl.replace('query', `artist:"${search}"`);
+						fullSearch = this.urls.searchArtistUrl.replace('query', `${search}`);
 					}
 					console.log(fullSearch);
 					fetchJsonp(fullSearch)
@@ -91,9 +102,9 @@ export default Vue.component('Home', (resolve, reject) => {
 					const order = this.checkOrder();
 					let fullSearch = '';
 					if (order) {
-						fullSearch = this.baseUrl.replace('query', `album:"${search}"&order=${order.toUpperCase()}`);
+						fullSearch = this.urls.searchAlbumUrl.replace('query', `${search}&order=${order.toUpperCase()}`);
 					} else {
-						fullSearch = this.baseUrl.replace('query', `album:"${search}"`);
+						fullSearch = this.urls.searchAlbumUrl.replace('query', `${search}`);
 					}
 					console.log(fullSearch);
 					fetchJsonp(fullSearch)
@@ -149,52 +160,5 @@ export default Vue.component('Home', (resolve, reject) => {
 				$route: 'quickOrAdvanced'
 			},
 			template,
-			components: {
-				tout: resolveTout => fetch('../templates/locals/search/tout.html')
-					.then(tout => tout.text())
-					.then(tout => resolveTout({
-						template: tout,
-						props: {
-							// Contain the results for the "tout" tab
-							res: {
-								type: Object,
-								required: true
-							}
-						},
-						data: function () {
-							return {
-								// The titles to iterate through
-								titles: [
-									'Titre',
-									'Artiste',
-									'Album',
-									'Dur.',
-									'Pop.'
-								]
-							};
-						}
-					})),
-				artistes: resolveArts => fetch('../templates/locals/search/artistes.html')
-					.then(arts => arts.text())
-					.then(arts => resolveArts({
-						template: arts,
-						data: function () {
-							return {
-								title: 'artistes'
-							};
-						}
-					})),
-				albums: resolveAlbs => fetch('../templates/locals/search/albums.html')
-					.then(albs => albs.text())
-					.then(albs => resolveAlbs({
-						template: albs,
-						data: function () {
-							return {
-								title: 'albums'
-							};
-						}
-					})),
-			}
-
 		}));
 });

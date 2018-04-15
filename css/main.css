@@ -356,9 +356,10 @@ h1, h2, h3,
 h4, h5, h6 {
 	margin: 0;
 	font-weight: normal;
+	font-size: 1em;
 }
 h1 {
-	font-size: 1.5rem;
+	font-size: 1.5em;
 }
 
 /***************************
@@ -409,6 +410,45 @@ body {
 }
 .grid-for-search:nth-child(n+2):hover {
 	background-color: var(--after-li-color);
+}
+.flex-wrap {
+	flex-wrap: wrap;
+}
+.flex {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+.flex-column {
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+}
+.justify-center {
+	justify-content: center;
+}
+.align-center {
+	-ms-align-items: center;
+	align-items: center;
+}
+.tac {
+	text-align: center;
+}
+.tal {
+	text-align: left;
+}
+.radius-50pc {
+	border-radius: 50%;
+}
+.radius-5px {
+	border-radius: 5px;
+}
+.w-250 {
+	width: 250px;
 }
 .fav-heart {
 	text-align: center;

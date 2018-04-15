@@ -3,9 +3,9 @@
 		<h1 id="results-for" v-if="allResults.total">Résultats de recherche pour «{{ search }}»</h1>
 		
 		<tabs-menu headers="tout artistes albums">
-			<tout :res="allResults.all" slot="tout" key="a"></tout>
-			<artistes :res="allResults.artists" slot="artistes" key="b"></artistes>
-			<albums :res="allResults.albums" slot="albums" key="c"></albums>
+			<track-grid :tracks="allResults.all" slot="tout" key="a"></track-grid>
+			<artist-grid :artists="allResults.artists" slot="artistes" key="b"></artist-grid>
+			<album-grid :albums="allResults.albums" slot="albums" key="c"></album-grid>
 		</tabs-menu>
 	</div>
 </div>

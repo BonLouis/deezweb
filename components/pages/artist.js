@@ -24,11 +24,9 @@ export default Vue.component('Artist', (resolve) => {
 					this.loadAll();
 				},
 				watch: {
-					tops: function () {
+					albums: function () {
 						const headerTop = document.querySelector('#header-top');
-						// const pickATrack = Math.random() * this.limit >> 0;
-						// headerTop.style.backgroundImage = `url(${this.top.data[pickATrack].album.cover_big})`;
-						headerTop.style.backgroundImage = `url(${this.tops.data[0].album.cover_xl})`;
+						headerTop.style.backgroundImage = `url(${this.albums.data[0].cover_xl})`;
 					}
 				},
 				methods: {
@@ -76,13 +74,7 @@ export default Vue.component('Artist', (resolve) => {
 							});
 					},
 				},
-				template,
-				/**
-				 * Locals components
-				 */
-				components: {
-					
-				}
+				template
 			});
 		});
 });

@@ -1,9 +1,16 @@
 <div id="artist">
-	<h2>{{data.title}}</h2>
-	<img :src="data.cover_big" alt="">
+	<img :src="album.cover_big" alt="">
 	<div>
-		<h3>Nombre d'albums: {{data.nb_tracks}}</h3>
-		<h3>Nombre de fans: {{data.fans}}</h3>
+		<div>
+			<h2>{{ album.title }}</h2>
+			<h2>{{ artist.name }}</h2>
+		</div>
+		<div>
+			<span>{{ album.nb_tracks }} titres</span>
+			<span>{{ album.fans }} fans</span>
+			<span>{{ album.release_date }}</span>
+			<span>{{ album.duration | duration }}min</span>
+		</div>
 	</div>
 	
 </div>	

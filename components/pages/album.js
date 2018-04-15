@@ -9,7 +9,8 @@ export default Vue.component('Album', (resolve, reject) => {
 			data: function () {
 				return {
 					baseUrl: albumUrl,
-					data: {}
+					album: {},
+					artist: {}
 				};
 			},
 			props: ['id'],
@@ -23,7 +24,8 @@ export default Vue.component('Album', (resolve, reject) => {
 					fetchJsonp(fullSearch)
 						.then(data => data.json())
 						.then((data) => {
-							this.data = data;
+							this.album = data;
+							this.artist = data.artist;
 						});
 				},
 			},

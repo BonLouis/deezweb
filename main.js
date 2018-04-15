@@ -109,10 +109,17 @@ import tabsMenu from '../components/globals/tabsMenu.js';
 
 
 	// Provide a way to declare filters globally
-	Vue.filter('duration', (int) => {
-		const min = (int / 60) >> 0; // Why to use Math.floor when we can use bitwise operator ...
-		const sec = int % 60;
-		return `${min < 10 ? `0${min}` : min}:${sec < 10 ? `0${sec}` : sec}`;
+	Vue.filter('duration', (int, withHours = false) => {
+		if (!withHours) {
+			const min = (int / 60) >> 0; // Why to use Math.floor when we can use bitwise operator ...
+			const sec = int % 60;
+			return `${min < 10 ? `0${min}` : min}:${sec < 10 ? `0${sec}` : sec}`;
+		} else {
+			const min = (int / 60) >> 0; // Why to use Math.floor when we can use bitwise operator ...
+			const sec = int % 60;
+			return `${min < 10 ? `0${min}` : min}:${sec < 10 ? `0${sec}` : sec}`;
+
+		}
 	});
 	Vue.filter('convertRankToPercent', rank => (rank / 10000) >> 0);
 })();

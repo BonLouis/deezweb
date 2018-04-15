@@ -1,35 +1,38 @@
-<ul id="results">
-	<li class="grid-for-search">
-		<div v-for="title in titles">
-			<h3>{{ title }}</h3>
-		</div>
-	</li>
-	<li class="grid-for-search" v-for="data in tracks.data">
-		<div>
-			<img :src="data.album.cover_small" class="search-cover-img" alt="">
-		</div>
-		<div class="fav-heart">
-			<transition name="heart-fav" mode="out-in">
-				<i key="1" v-if="`#${data.id}` in $root.favs" class="fa fa-heart " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
-				<i key="2" v-else class="fa fa-heart-o " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
-			</transition>
-		</div>
-		<div class="ellipsis">
-			<router-link class="title-link" :to="'/track/' + data.id">{{ data.title_short }}</router-link>
-		</div>
-		<div class="ellipsis">
-			<router-link class="artist-link" :to="'/artist/' + data.artist.id">{{ data.artist.name }}</router-link>
-		</div>
-		<div class="ellipsis">
-			<router-link class="album-link" :to="'/album/' + data.album.id">{{ data.album.title }}</router-link>
-		</div>
-		<div class="ellipsis">
-			<span class="duration">{{ data.duration | duration }}</span>
-		</div>
-		<div class="ellipsis">
-			<span class="popularity">
-				<span v-for="n in 10" :class="data.rank / 10000 > n * 10 ? 'pop-active' : 'pop-inactive'"></span>
-			</span>
-		</div>
-	</li>
-</ul>
+<div>
+	<p>{{ tracks.total }} pistes</p>
+	<ul id="results">
+		<li class="grid-for-search">
+			<div v-for="title in titles">
+				<h3>{{ title }}</h3>
+			</div>
+		</li>
+		<li class="grid-for-search" v-for="data in tracks.data">
+			<div>
+				<img :src="data.album.cover_small" class="search-cover-img" alt="">
+			</div>
+			<div class="fav-heart">
+				<transition name="heart-fav" mode="out-in">
+					<i key="1" v-if="`#${data.id}` in $root.favs" class="fa fa-heart " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
+					<i key="2" v-else class="fa fa-heart-o " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
+				</transition>
+			</div>
+			<div class="ellipsis">
+				<router-link class="title-link" :to="'/track/' + data.id">{{ data.title_short }}</router-link>
+			</div>
+			<div class="ellipsis">
+				<router-link class="artist-link" :to="'/artist/' + data.artist.id">{{ data.artist.name }}</router-link>
+			</div>
+			<div class="ellipsis">
+				<router-link class="album-link" :to="'/album/' + data.album.id">{{ data.album.title }}</router-link>
+			</div>
+			<div class="ellipsis">
+				<span class="duration">{{ data.duration | duration }}</span>
+			</div>
+			<div class="ellipsis">
+				<span class="popularity">
+					<span v-for="n in 10" :class="data.rank / 10000 > n * 10 ? 'pop-active' : 'pop-inactive'"></span>
+				</span>
+			</div>
+		</li>
+	</ul>
+</div>

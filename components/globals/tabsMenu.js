@@ -35,5 +35,4 @@ export default Vue.component('tabs-menu', (resolve, reject) => {
 				template
 			});
 		});
-
 });

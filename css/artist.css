@@ -1,7 +1,7 @@
 #artist {
-	--header-size: 500px;
-	--header-top-size : 300px;
-	--photo-diam: 200px;
+	--header-size: 350px;
+	--header-top-size : 230px;
+	--photo-diam: 150px;
 	--header-bottom-size : calc(var(--photo-diam) / 2);
 }
 #header {
@@ -18,7 +18,6 @@
 	/* Set this div to pos: rel give it a stacking context.
 	To cancel any side effect, let set it's z-index to -1 */
 	z-index: -1;
-
 }
 /*
 	That's a layer to be sure that
@@ -31,7 +30,7 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background-color: rgba(35, 35, 35, 0.6);
+	background-color: rgba(3, 7, 20, 0.4);
 }
 #header-bottom {
 	display: flex;
@@ -48,6 +47,7 @@
 }
 #picture-artist > img {
 	border-radius: 50%;
+	border: 1px solid #98999b;
 	height: var(--photo-diam);
 	width: var(--photo-diam);
 }
@@ -69,9 +69,13 @@
 	-o-flex-direction: column;
 	flex-direction: column;
 	justify-content: center;
-
 	color: #fff;
 }
+/*#picture-side-top span {
+	font-style: italic;
+	font-weight: 100;
+	color: #D8D8D8;
+}*/
 #picture-side-bottom {
 	display: -webkit-flex;
 	display: -moz-flex;

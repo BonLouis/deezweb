@@ -356,10 +356,6 @@ h1, h2, h3,
 h4, h5, h6 {
 	margin: 0;
 	font-weight: normal;
-	font-size: 1em;
-}
-h1 {
-	font-size: 1.5em;
 }
 
 /***************************
@@ -373,12 +369,12 @@ h1 {
 	--after-li-color: #efeff2;
 }
 html {
-	font-size: 10px;
+	font-size: 14px;
 }
 body {
 	font-family: 'Open Sans', 'arial', sans-serif;
 	background-color: #fff;
-	font-size: 1.5rem;
+	font-size: 1rem;
 }
 
 /* Class factory */
@@ -431,6 +427,12 @@ body {
 .justify-center {
 	justify-content: center;
 }
+.justify-between {
+	justify-content: space-between;
+}
+.justify-around {
+	justify-content: space-around;
+}
 .align-center {
 	-ms-align-items: center;
 	align-items: center;
@@ -440,6 +442,14 @@ body {
 }
 .tal {
 	text-align: left;
+}
+.italic {
+	font-style: italic;
+}
+.tiny-font {
+	color: #D5D5D5;
+	font-weight: 300;
+	font-size: 1rem;
 }
 .radius-50pc {
 	border-radius: 50%;

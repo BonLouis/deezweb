@@ -447,8 +447,8 @@ body {
 	font-style: italic;
 }
 .tiny-font {
-	color: #D5D5D5;
-	font-weight: 300;
+	color: #92929d;
+	font-weight: 400;
 	font-size: 1rem;
 }
 .radius-50pc {
@@ -459,6 +459,9 @@ body {
 }
 .w-250 {
 	width: 250px;
+}
+.mr-2{
+	margin-right: 2rem;
 }
 .fav-heart {
 	text-align: center;

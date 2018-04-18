@@ -1,7 +1,7 @@
 <div id="album">
 	<div id="album-header" class="flex">
-		<img :src="album.cover_medium" alt="">
-		<div class="flex flex-column justify-between">
+		<img v-if="!/artist\/\//.test(album.cover_medium)" class="mr-2" :src="album.cover_medium" alt="">
+		<div class="flex flex-column justify-around">
 			<div>
 				<h1>{{ album.title }}</h1>
 				<div class="flex align-center">
@@ -12,7 +12,7 @@
 			<div class="tiny-font">
 				<span>{{ album.nb_tracks }} titres</span>
 				<span>- {{ album.duration | duration(true) }}</span>
-				<span>- {{ album.release_date }}</span>
+				<span>- {{ album.release_date | slashedDate }}</span>
 				<span>- {{ album.fans }} fans</span>
 			</div>
 		</div>

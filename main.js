@@ -120,5 +120,6 @@ import tabsMenu from '../components/globals/tabsMenu.js';
 
 
 	});
-	Vue.filter('convertRankToPercent', rank => (rank / 10000) >> 0);
+	// Vue.filter('convertRankToPercent', rank => (rank / 10000) >> 0);
+	Vue.filter('slashedDate', date => date.replace(/-/g, '/'));
 })();

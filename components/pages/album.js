@@ -1,4 +1,4 @@
-import { albumUrl } from '../../js/utils.js';
+import { mixins, albumUrl } from '../../js/utils.js';
 
 export default Vue.component('Album', (resolve, reject) => {
 	fetch('../templates/pages/album.html')
@@ -6,11 +6,12 @@ export default Vue.component('Album', (resolve, reject) => {
 		.then((template) => {
 			resolve({
 				name: 'album',
+				mixins: [mixins],
 				data: function () {
 					return {
 						baseUrl: albumUrl,
 						album: {},
-						artist: {}
+						artist: {},
 					};
 				},
 				props: ['id'],

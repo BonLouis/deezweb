@@ -20,7 +20,7 @@
 			<div class="ellipsis">
 				<router-link class="title-link" :to="'/track/' + data.id">{{ data.title_short }}</router-link>
 			</div>
-			<div class="ellipsis">
+			<div  v-if="!mode" class="ellipsis">
 				<router-link class="artist-link" :to="'/artist/' + data.artist.id">{{ data.artist.name }}</router-link>
 			</div>
 			<div v-if="!mode" class="ellipsis">

@@ -476,7 +476,7 @@ body {
 	margin-right: 2rem;
 }
 .fav-heart {
-	text-align: center;
+	/*text-align: center;*/
 	cursor: pointer;
 	color: red;
 }
@@ -519,8 +519,8 @@ form input {
 #results > li.grid-for-search:first-child > div:first-child  {
 	grid-column-start: 3;
 }
-#album #results > li.grid-for-album:nth-child(2) > div:first-child  {
-	grid-column-start: 4;
+#album #results > li.grid-for-album:nth-child(1) > div:nth-child(2)  {
+	grid-column-start: 3;
 }
 #advanced {
 	display: -webkit-flex;

@@ -3,9 +3,9 @@
 		<img v-if="!/artist\/\//.test(album.cover_medium)" class="mr-2" :src="album.cover_medium" alt="">
 		<div class="flex flex-column justify-around">
 			<div>
-				<h1>{{ album.title }}</h1>
+				<h1 class="mb-1">{{ album.title }}</h1>
 				<div class="flex align-center">
-					<img :src="artist.picture_small" class="radius-50pc" alt="">
+					<img class="radius-50pc tiny-pic" :src="artist.picture_small" alt="">
 					<h2>{{ artist.name }}</h2>
 				</div>
 			</div>
@@ -17,4 +17,5 @@
 			</div>
 		</div>
 	</div>
+	<track-grid :tracks="album.tracks" :mode="true"></track-grid>
 </div>

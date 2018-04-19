@@ -1,15 +1,16 @@
 <div>
-	<p>{{ tracks.total }} pistes</p>
+	<p v-if="!mode">{{ tracks.total }} pistes</p>
 	<ul id="results">
-		<li class="grid-for-search">
+		<li :class="{ 'grid-for-search': !mode, 'grid-for-album': mode }">
 			<div v-for="title in titles">
 				<h3>{{ title }}</h3>
 			</div>
 		</li>
-		<li class="grid-for-search" v-for="data in tracks.data">
-			<div>
+		<li :class="{ 'grid-for-search': !mode, 'grid-for-album': mode }" v-for="data, i in tracks.data">
+			<div v-if="!mode">
 				<img :src="data.album.cover_small" class="search-cover-img" alt="">
 			</div>
+			<div v-else>{{ i + 1 }}</div>
 			<div class="fav-heart">
 				<transition name="heart-fav" mode="out-in">
 					<i key="1" v-if="`#${data.id}` in $root.favs" class="fa fa-heart " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
@@ -22,7 +23,7 @@
 			<div class="ellipsis">
 				<router-link class="artist-link" :to="'/artist/' + data.artist.id">{{ data.artist.name }}</router-link>
 			</div>
-			<div class="ellipsis">
+			<div v-if="!mode" class="ellipsis">
 				<router-link class="album-link" :to="'/album/' + data.album.id">{{ data.album.title }}</router-link>
 			</div>
 			<div class="ellipsis">

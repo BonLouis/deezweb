@@ -1,6 +1,7 @@
 import router from '../components/Router.js';
 // Global inscription, no need to use it anywhere but in the HTML
 import tabsMenu from '../components/globals/tabsMenu.js';
+import trackGrid from '../components/globals/trackGrid.js';
 
 (() => {
 	Vue.component('album-grid', resolve => fetch('../templates/locals/album-grid.html')
@@ -20,30 +21,7 @@ import tabsMenu from '../components/globals/tabsMenu.js';
 				}
 			},
 		})));
-	Vue.component('track-grid', resolve => fetch('../templates/locals/track-grid.html')
-		.then(tout => tout.text())
-		.then(tout => resolve({
-			template: tout,
-			props: {
-				// Contain the results for the "tout" tab
-				tracks: {
-					type: Object,
-					required: true
-				}
-			},
-			data: function () {
-				return {
-					// The titles to iterate through
-					titles: [
-						'Titre',
-						'Artiste',
-						'Album',
-						'Dur.',
-						'Pop.'
-					]
-				};
-			}
-		})));
+
 	Vue.component('artist-grid', resolveArts => fetch('../templates/locals/artist-grid.html')
 		.then(arts => arts.text())
 		.then(arts => resolveArts({

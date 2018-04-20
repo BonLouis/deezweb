@@ -6,15 +6,19 @@ export default Vue.component('Favs', (resolve, reject) => {
 				name: 'favorites',
 				data: function () {
 					return {
-						favs: []
+						favs: {
+							data: [],
+							total: 0
+						}
 					};
 				},
 				created() {
 					for (const item in localStorage) {
 						if (/^#/.test(item)) {
-							this.favs.push(JSON.parse(localStorage.getItem(item)));
+							this.favs.data.push(JSON.parse(localStorage.getItem(item)));
 						}
 					}
+					this.favs.total = this.favs.data.length;
 				},
 				methods: {
 					addOrRemoveFav: function (data) {

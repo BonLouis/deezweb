@@ -6,7 +6,7 @@
 				<h1 class="mb-1">{{ album.title }}</h1>
 				<div class="flex align-center">
 					<img class="radius-50pc tiny-pic" :src="artist.picture_small" alt="">
-					<h2>{{ artist.name }}</h2>
+					<router-link :to="{name: 'artist', params: {id: artist.id}}" tag="h2">{{ artist.name }}</router-link>
 				</div>
 			</div>
 			<div class="tiny-font">

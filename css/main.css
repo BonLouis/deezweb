@@ -397,7 +397,7 @@ body {
 	transition: background-color .5s ease-out;	
 }
 .grid-for-album {
-	grid-template-columns: 3rem 3rem 5fr 3fr 1fr 1fr;
+	grid-template-columns: 3rem 3rem 5fr 3fr 1fr;
 }
 .grid-for-search::before,
 .grid-for-album::before {
@@ -410,8 +410,15 @@ body {
 	top: 0;
 }
 .grid-for-search:nth-child(n+2):hover,
-.grid-for-album:nth-child(n+2):hover, {
+.grid-for-album:nth-child(n+2):hover {
 	background-color: var(--after-li-color);
+}
+.grid-for-search:nth-child(n+2) > div:first-child,
+.grid-for-search:nth-child(n+2) > div:nth-child(2),
+.grid-for-album:nth-child(n+2) > div:first-child,
+.grid-for-album:nth-child(n+2) > div:nth-child(2),
+.grid-for-album:first-child > div:first-child {
+	text-align: center;
 }
 .flex-wrap {
 	flex-wrap: wrap;
@@ -476,7 +483,6 @@ body {
 	margin-right: 2rem;
 }
 .fav-heart {
-	/*text-align: center;*/
 	cursor: pointer;
 	color: red;
 }
@@ -608,4 +614,13 @@ form input {
 	height: 100%;
 	width: 100%;
 	background-color: #0E6CFC;
+}
+/**
+ * Player
+ */
+
+.deezer-widget-player {
+	position: absolute;
+	bottom: 0;
+	left: 0;
 }

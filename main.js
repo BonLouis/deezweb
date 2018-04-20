@@ -74,6 +74,12 @@ import trackGrid from '../components/globals/trackGrid.js';
 						}
 					});
 				}
+			},
+			play(type, id) {
+				const player = document.querySelector('.deezer-widget-player');
+				const curData = player.getAttribute('data-src');
+				const newData = curData.replace(/(&type=).+(&id=)/, "$1"+type+"$2"+id);
+				player.setAttribute('data-src', newData);
 			}
 		},
 		created() {

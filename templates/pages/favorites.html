@@ -1,31 +1,4 @@
-<div class="favs">
-	<ul v-for="data in favs">
-		<li class="card">
-				<div class="card-wrapper-img">
-					<img :src="data.album.cover_small" alt="">
-				</div>
-				<div class="card-wrapper-fav">
-					<transition name="heart-fav" mode="out-in">
-						<i key="1" v-if="`#${data.id}` in favs" class="fa fa-heart" @click="addOrRemoveFav(data)" aria-hidden="true"></i>
-						<i key="2" v-else class="fa fa-heart-o" @click="addOrRemoveFav(data)" aria-hidden="true"></i>
-					</transition>
-				</div>
-				<div class="card-wrapper-title">
-					<router-link class="title-link" :to="'/track/' + data.id">{{ data.title_short }}</router-link>
-				</div>
-				<div class="card-wrapper-artist">
-					<router-link class="artist-link" :to="'/artist/' + data.artist.id">{{ data.artist.name }}</router-link>
-				</div>
-				<div class="card-wrapper-album">
-					<router-link class="album-link" :to="'/album/' + data.album.id">{{ data.album.title }}</router-link>
-				</div>
-				<div class="card-wrapper-duration">
-					<span class="duration">{{ data.duration }}</span>
-				</div>
-				<div class="card-wrapper-popularity">
-					<span class="popularity">#####</span>
-				</div>
-			</li>
-	</ul>
-	<div v-if="!favs.length">Vous n'avez pas encore de favoris</div>
+<div id="favs">
+	
+	<track-grid :tracks="favs"></track-grid>
 </div>

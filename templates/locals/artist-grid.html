@@ -1,4 +1,4 @@
-<div>
+<div v-if="!$root.loading">
 	<p>{{ artists.total }} artistes</p>
 	<ul id="search-for-artists" class="flex flex-wrap tac">
 		<li v-for="artist in artists.data">

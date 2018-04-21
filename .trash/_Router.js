@@ -14,7 +14,7 @@ export default new VueRouter({
 		path: '/search',
 		component: Search,
 	}, {
-		path: '/search/:search/:showTab?',
+		path: '/search/:search/',
 		name: 'quickSearch',
 		component: Search,
 		props: true,
@@ -24,8 +24,12 @@ export default new VueRouter({
 		component: Search,
 		props: true,
 	}, {
+		path: '/search/advanced',
+		name: 'advancedSearch',
+		component: Search,
+	}, {
 		name: 'artist',
-		path: '/artist/:id/:showTab?',
+		path: '/artist/:id',
 		component: Artist,
 		props: true,
 	}, {
@@ -35,7 +39,7 @@ export default new VueRouter({
 		props: true
 	}, {
 		name: 'favs',
-		path: '/favs/:showTab?',
+		path: '/favs',
 		component: Favs
 	}]
 });

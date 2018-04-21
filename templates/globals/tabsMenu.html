@@ -1,4 +1,4 @@
-<div id="tabs-menu">
+<div id="tabs-menu" v-if="!$root.loading">
 	<ul id="tabs-titles">
 		<li v-for="title in titles" :class="{active: title === activeTab}" @click="showTab(title)"> {{ title | toUp }} </li>
 	</ul>

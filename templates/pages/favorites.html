@@ -1,4 +1,4 @@
-<div id="favs">
-	
+<div id="favs" v-if="!$root.loading">
+	<tabs-menu headers="Titres, Artistes, Albums"></tabs-menu>
 	<track-grid :tracks="favs"></track-grid>
 </div>

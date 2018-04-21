@@ -10,8 +10,12 @@
 		
 		<title>Recherche</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+		<script src="node_modules/fetch-jsonp/build/fetch-jsonp.js"></script>
 		<script src="node_modules/vue/dist/vue.js"></script>
 		<script src="node_modules/vue-router/dist/vue-router.js"></script>
+		<!-- <script src="node_modules/es6-import/dist/importer.js" import="./appStartScript.js"></script> -->
 	</head>
 	<body>
 		<div id="app">
@@ -34,8 +38,7 @@
 							<router-link to="/favs">Mes favoris</router-link>
 						</li>
 					</ul>
-					<div id="dz-root"></div>
-					<div id="player" style="position: absolute; bottom: 0; left: 0;"></div>
+					<div id="widg-target" class="deezer-widget-player" data-src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=220&height=220&color=007FEB&layout=dark&size=medium&type=tracks&id=1079668&app_id=277922" data-scrolling="no" data-frameborder="0" data-allowTransparency="true" data-width="220" data-height="220"></div>
 				</div>
 			</nav>
 			
@@ -44,32 +47,7 @@
 				</router-view>
 			</transition>
 		</div>
-		<script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>
-		<script>
-		DZ.init({
-			appId  : '1',
-			channelUrl : 'http://127.0.0.1:8080/channel.html',
-			player: {
-				container: 'player',
-				format: 'square',
-				size: 'small',
-				width : 220,
-				height : 220,
-				onload : function(){}
-			}
-		});
-		DZ.login(function(response) {
-			if (response.authResponse) {
-			console.log('Welcome!  Fetching your information.... ');
-			DZ.api('/user/me', function(response) {
-				console.log('Good to see you, ' + response.name + '.');
-			});
-			} else {
-			console.log('User cancelled login or did not fully authorize.');
-			}
-		}, {perms: 'basic_access,email'});
-		</script>
-		<script src="node_modules/fetch-jsonp/build/fetch-jsonp.js"></script>
-		<script type="module" src="main.js"></script>
+		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+		<script type="text/babel" src="build/main.bundle.js"></script>
 	</body>
 </html>

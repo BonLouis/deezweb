@@ -1,4 +1,4 @@
-<div>
+<div v-if="!$root.loading">
 	<p v-if="!mode">{{ tracks.total }} pistes</p>
 	<ul id="results">
 		<li :class="{ 'grid-for-search': !mode, 'grid-for-album': mode }">
@@ -8,17 +8,17 @@
 		</li>
 		<li :class="{ 'grid-for-search': !mode, 'grid-for-album': mode }" v-for="data, i in tracks.data">
 			<div v-if="!mode">
-				<img :src="data.album.cover_small" class="search-cover-img" alt="" @click="$root.play('track', data.id)">
+				<img :src="data.album.cover_small || ''" class="search-cover-img" alt="" @click="$root.initWidget(data)">
 			</div>
 			<div v-else>{{ i + 1 }}</div>
 			<div class="fav-heart">
 				<transition name="heart-fav" mode="out-in">
-					<i key="1" v-if="`#${data.id}` in $root.favs" class="fa fa-heart " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
-					<i key="2" v-else class="fa fa-heart-o " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
+					<i key="1" v-if="`#${data.id}` in $root.favs" title="Retirer des favoris" class="fa fa-heart " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
+					<i key="2" v-else title="Ajouter aux favoris" class="fa fa-heart-o " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
 				</transition>
 			</div>
 			<div class="ellipsis">
-				<router-link class="title-link" :to="{name: 'track', params: {id: data.id}}">{{ data.title_short }}</router-link>
+				<span class="title-link" @click="$root.initWidget(data)">{{ data.title_short }}</span>
 			</div>
 			<div  v-if="!mode" class="ellipsis">
 				<router-link class="artist-link" :to="'/artist/' + data.artist.id">{{ data.artist.name }}</router-link>

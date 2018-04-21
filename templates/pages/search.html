@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" v-if="!$root.loading">
 	<div id="search-results">
 		<h1 id="results-for" v-if="allResults.total">Résultats de recherche pour «{{ search }}»</h1>
 		

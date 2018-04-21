@@ -1,11 +1,12 @@
-<div id="album">
+<div id="album" v-if="!$root.loading">
 	<div id="album-header" class="flex">
-		<img v-if="!/artist\/\//.test(album.cover_medium)" class="mr-2" :src="album.cover_medium" alt="">
+		<img class="mr-2" :src="album.cover_medium" alt="" @click="$root.initWidget('album', album.id)">
+		<!-- <img v-if="!/artist\/\//.test(album.cover_medium)" class="mr-2" :src="album.cover_medium" alt="" @click="$root.initWidget('album', album.id)"> -->
 		<div class="flex flex-column justify-around">
 			<div>
 				<h1 class="mb-1">{{ album.title }}</h1>
 				<div class="flex align-center">
-					<img class="radius-50pc tiny-pic" :src="artist.picture_small" alt="">
+					<img v-if="!/artist\/\//.test(artist.picture_small)" class="radius-50pc tiny-pic" :src="artist.picture_small" alt="">
 					<router-link :to="{name: 'artist', params: {id: artist.id}}" tag="h2">{{ artist.name }}</router-link>
 				</div>
 			</div>

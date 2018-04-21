@@ -1,11 +1,17 @@
-<div id="results-for-albums" >
+<div id="results-for-albums" v-if="!$root.loading">
 	<p> {{ albums.total }} albums</p>
 
 	<ul class="flex flex-wrap">
 		<li v-for="album in albums.data">
-			<router-link :to="'/album/' + album.id">
+			<router-link :to="'/album/' + album.id" :key="album.id">
 				<figure class="w-250">
-					<img :src="album.cover_medium" alt="" class="radius-5px">
+					<div class="pos-r" @mouseenter="toggleShowBtn(album.id)" @mouseleave="toggleShowBtn(album.id)">
+						<img :src="album.cover_medium" alt="" class="radius-5px">
+						<div class="album-btn" v-if="showBtnArray.indexOf(album.id) !== -1">
+							<span class="fav-btn-round" @click.prevent="$root.addOrRemoveFav(album)">Ajouter</span>
+							<span class="play-btn" @click.prevent="$root.initWidget(album)">Jouer</span>
+						</div>
+					</div>
 					<figcaption>
 						<h2>{{ album.title }}</h2>
 						<h3 v-if="album.artist" class="tal">par {{ album.artist.name }}</h3>

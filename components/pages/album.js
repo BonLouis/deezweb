@@ -18,6 +18,17 @@ export default Vue.component('Album', (resolve, reject) => {
 				created() {
 					this.makeSearch();
 				},
+				computed: {
+					c_date: function() {
+						return this.album.release_date ? this.album.release_date.replace(/-/g, '/') : '';
+					}
+				},
+				watch: {
+					'$route.params.id': function () {
+						this.$root.loading = true;
+						this.makeSearch();
+					},
+				},
 				methods: {
 					makeSearch() {
 						let fullSearch = '';
@@ -27,6 +38,7 @@ export default Vue.component('Album', (resolve, reject) => {
 							.then((data) => {
 								this.album = data;
 								this.artist = data.artist;
+								this.$root.loading = false;
 							});
 					},
 				},

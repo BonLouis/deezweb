@@ -2,48 +2,13 @@ import router from '../components/Router.js';
 // Global inscription, no need to use it anywhere but in the HTML
 import tabsMenu from '../components/globals/tabsMenu.js';
 import trackGrid from '../components/globals/trackGrid.js';
+import artistGrid from '../components/globals/artistGrid.js';
+import albumGrid from '../components/globals/albumGrid.js';
 
 (() => {
-	Vue.component('album-grid', resolve => fetch('../templates/locals/album-grid.html')
-		.then(albs => albs.text())
-		.then(albs => resolve({
-			name: 'results-for-albums',
-			template: albs,
-			props: {
-				// Contain the results for the "tout" tab
-				albums: {
-					type: Object,
-					required: true
-				},
-				release: {
-					type: Boolean,
-					required: false
-				}
-			},
-		})));
-
-	Vue.component('artist-grid', resolveArts => fetch('../templates/locals/artist-grid.html')
-		.then(arts => arts.text())
-		.then(arts => resolveArts({
-			name: 'artist-grid',
-			template: arts,
-			props: {
-				// Contain the results for the "tout" tab
-				artists: {
-					type: Object,
-					required: true
-				}
-			},
-			filters: {
-				addSpace: int => int.toLocaleString()
-			},
-		})));
 	const app = new Vue({
 		el: '#app',
 		name: 'parent',
-		components: {
-
-		},
 		router,
 		data: {
 			favs: {},
@@ -52,18 +17,18 @@ import trackGrid from '../components/globals/trackGrid.js';
 		},
 		methods: {
 			addOrRemoveFav: function (data) {
-				if (`#${data.id}` in localStorage) {
-					Vue.delete(this.favs, `#${data.id}`);
-					localStorage.removeItem(`#${data.id}`);
+				if (`${data.type}#${data.id}` in localStorage) {
+					Vue.delete(this.favs, `${data.type}#${data.id}`);
+					localStorage.removeItem(`${data.type}#${data.id}`);
 				} else {
-					Vue.set(this.favs, `#${data.id}`, JSON.stringify(data));
-					localStorage.setItem(`#${data.id}`, JSON.stringify(data));
+					Vue.set(this.favs, `${data.type}#${data.id}`, JSON.stringify(data));
+					localStorage.setItem(`${data.type}#${data.id}`, JSON.stringify(data));
 				}
 				console.log(localStorage.length);
 			},
-			test: function (id) {
-				return `#${id}` in this.favs;
-			},
+			// test: function (data) {
+			// 	return `${data.type}#${data.id}` in this.favs;
+			// },
 
 			goSearch() {
 				if (this.quickSearchInput.length) {
@@ -75,11 +40,43 @@ import trackGrid from '../components/globals/trackGrid.js';
 					});
 				}
 			},
-			play(type, id) {
-				const player = document.querySelector('.deezer-widget-player');
-				const curData = player.getAttribute('data-src');
-				const newData = curData.replace(/(&type=).+(&id=)/, "$1"+type+"$2"+id);
-				player.setAttribute('data-src', newData);
+			initWidget(data) {
+
+				const d = document;
+				const widg = d.querySelector('#widg-target');
+				if (data) {
+					let mode;
+					let {id} = data;
+					if (data.type === 'artist') {
+						mode = 'radio';
+						id = `artist-${id}`;
+					} else if (data.type === 'track') {
+						mode = 'tracks';
+					} else {
+						mode = data.type;
+					}
+					debugger;
+					const oldData = widg.getAttribute('data-src');
+					let newData = oldData.replace(/(&type=)\w+(&id=)\d+/, `$1${mode}$2${id}`);
+					if (/&autoplay=false/.test(newData)) {
+						newData = newData.replace(/&autoplay=false/, '&autoplay=true');
+					}
+					widg.setAttribute('data-src', newData);
+				}
+				const s = 'script';
+				const idl = 'deezer-widget-loader';
+				const head = d.querySelector('head');
+				let js;
+				if (d.getElementById(idl)) {
+					// head.removeChild(d.getElementById(idl));
+					while (widg.firstChild) {
+						widg.removeChild(widg.firstChild);
+					}
+				}
+				js = d.createElement(s);
+				js.id = idl;
+				js.src = 'https://e-cdns-files.dzcdn.net/js/widget/loader.js';
+				head.appendChild(js);
 			}
 		},
 		created() {
@@ -88,6 +85,7 @@ import trackGrid from '../components/globals/trackGrid.js';
 					this.favs[`${item}`] = localStorage.getItem(`#${item}`);
 				}
 			}
+			this.initWidget();
 		},
 	});
 
@@ -101,9 +99,6 @@ import trackGrid from '../components/globals/trackGrid.js';
 		// else
 		const min = (int / 60) >> 0; // Why to use Math.floor when we can use bitwise operator ...
 		return `${min} min`;
-
-
 	});
-	// Vue.filter('convertRankToPercent', rank => (rank / 10000) >> 0);
 	Vue.filter('slashedDate', date => date.replace(/-/g, '/'));
 })();

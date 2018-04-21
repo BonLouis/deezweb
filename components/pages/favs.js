@@ -13,12 +13,14 @@ export default Vue.component('Favs', (resolve, reject) => {
 					};
 				},
 				created() {
+					this.$root.loading = true;
 					for (const item in localStorage) {
 						if (/^#/.test(item)) {
 							this.favs.data.push(JSON.parse(localStorage.getItem(item)));
 						}
 					}
 					this.favs.total = this.favs.data.length;
+					this.$root.loading = false;
 				},
 				methods: {
 					addOrRemoveFav: function (data) {

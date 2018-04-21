@@ -378,7 +378,14 @@ body {
 }
 
 /* Class factory */
-
+.album-btn {
+	position: absolute;
+	bottom: 2rem;
+	left: 2rem;
+}
+.pos-r {
+	position: relative;
+}
 .ellipsis {
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -390,7 +397,7 @@ body {
 	padding: 0 2rem;	
 	position: relative;
 	display: grid;
-	grid-template-columns: 3rem 3rem 5fr 3fr 3fr 1fr 1fr;
+	grid-template-columns: 3rem 3rem 5fr 3fr 3fr 3.3rem 3.8rem;
 	grid-template-rows: 3.5rem;
 	align-items: center;
 	grid-gap: 1rem;
@@ -411,6 +418,7 @@ body {
 }
 .grid-for-search:nth-child(n+2):hover,
 .grid-for-album:nth-child(n+2):hover {
+	cursor: pointer;
 	background-color: var(--after-li-color);
 }
 .grid-for-search:nth-child(n+2) > div:first-child,

@@ -1,4 +1,7 @@
-import { mixins, artistUrl } from '../../js/utils.js';
+import {
+	mixins,
+	artistUrl
+} from '../../js/utils.js';
 // import Discographie from '../locals/discographie.js';
 // debugger;
 export default Vue.component('Artist', (resolve) => {
@@ -27,7 +30,10 @@ export default Vue.component('Artist', (resolve) => {
 					albums: function () {
 						const headerTop = document.querySelector('#header-top');
 						headerTop.style.backgroundImage = `url(${this.albums.data[0].cover_xl})`;
-					}
+					},
+					'$route.params.id': function () {
+						this.loadAll();
+					},
 				},
 				methods: {
 					loadAll() {
@@ -43,6 +49,7 @@ export default Vue.component('Artist', (resolve) => {
 							.then(artist => artist.json())
 							.then((artist) => {
 								this.artist = artist;
+								this.$root.loading = false;
 							});
 					},
 					loadTop() {

@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "babel": "browserify main.js -o main.bundle.js -t [ babelify --presets [ '@babel/preset-env', '@babel/preset-react' ] ]"
+  },
   "author": "Louis",
   "license": "ISC",
   "dependencies": {

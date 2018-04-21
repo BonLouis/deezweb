@@ -31,6 +31,7 @@ export default Vue.component('Home', (resolve, reject) => {
 				};
 			},
 			created() {
+				this.$root.loading = true;
 				this.quickOrAdvanced();
 			},
 			methods: {
@@ -111,6 +112,7 @@ export default Vue.component('Home', (resolve, reject) => {
 						.then(data => data.json())
 						.then((data) => {
 							this.$set(this.allResults, 'albums', data);
+							this.$root.loading = false;
 						});
 				},
 				quickOrAdvanced: function () {
@@ -157,7 +159,7 @@ export default Vue.component('Home', (resolve, reject) => {
 				// With this trick,
 				// we can handle both url's changes from the user's hand
 				// and url's changes from the form.
-				$route: 'quickOrAdvanced'
+				// $route: 'quickOrAdvanced'
 			},
 			template,
 		}));

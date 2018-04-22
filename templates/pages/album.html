@@ -1,6 +1,6 @@
 <div id="album" v-if="!$root.loading">
 	<div id="album-header" class="flex">
-		<div class="pos-r">
+		<div class="pos-r" @mouseenter="$root.toggleShowBtn(album.id)" @mouseleave="$root.toggleShowBtn(album.id)">
 			<img class="mr-2" :src="album.cover_medium" alt="" @click="$root.initWidget(album)">
 			<div class="group-btn flex align-around" v-if="$root.showBtnArray.indexOf(album.id) !== -1">
 				<div class="play-btn" @click.prevent="$root.initWidget(album)"><i class="fa fa-play"></i></div>

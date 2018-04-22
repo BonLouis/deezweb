@@ -1,5 +1,5 @@
 export default Vue.component('album-grid', (resolve) => {
-	fetch('../../templates/locals/album-grid.html')
+	fetch('../../templates/components/album-grid.html')
 		.then(albs => albs.text())
 		.then((albs) => {
 			resolve({

@@ -1,5 +1,5 @@
 export default Vue.component('artist-grid', (resolveArts) => {
-	fetch('../../templates/locals/artist-grid.html')
+	fetch('../../templates/components/artist-grid.html')
 		.then(arts => arts.text())
 		.then((arts) => {
 			resolveArts({

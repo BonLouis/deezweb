@@ -1,7 +1,12 @@
 <div id="favs" v-if="!$root.loading">
 	<tabs-menu headers="titres artistes albums">
-		<track-grid :tracks="favs.tracks" slot="titres" key="a"></track-grid>
-		<artist-grid :artists="favs.artists" slot="artistes" key="b"></artist-grid>
-		<album-grid :albums="favs.albums" slot="albums" key="c"></album-grid>
+		<track-grid v-if="favs.tracks.total" :tracks="favs.tracks" slot="titres" key="a"></track-grid>
+		<div v-if="!favs.tracks.total" slot="titres" key="a">Vous n'avez pas de piste favorite</div>
+		
+		<artist-grid v-if="favs.artists.total" :artists="favs.artists" slot="artistes" key="b"></artist-grid>
+		<div v-if="!favs.artists.total" slot="artistes" key="a">Vous n'avez pas d'artiste farovis</div>
+
+		<album-grid v-if="favs.albums.total" :albums="favs.albums" slot="albums" key="c"></album-grid>
+		<div v-if="!favs.albums.total" slot="albums" key="a">Vous n'avez pas d'album favoris</div>
 	</tabs-menu>
 </div>

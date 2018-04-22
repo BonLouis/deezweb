@@ -1,4 +1,4 @@
-import { mixins, albumUrl } from '../../js/utils.js';
+import { mixins, albumUrl } from '../utils.js';
 
 export default Vue.component('Album', (resolve, reject) => {
 	fetch('../templates/pages/album.html')
@@ -16,6 +16,7 @@ export default Vue.component('Album', (resolve, reject) => {
 				},
 				props: ['id'],
 				created() {
+					this.$root.loading = true;
 					this.makeSearch();
 				},
 				computed: {

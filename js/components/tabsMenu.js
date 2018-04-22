@@ -1,7 +1,7 @@
-import { mixins } from '../../js/utils.js';
+import { mixins } from '../utils.js';
 
 export default Vue.component('tabs-menu', (resolve, reject) => {
-	fetch('../templates/globals/tabsMenu.html')
+	fetch('../../templates/components/tabsMenu.html')
 		.then(res => res.text())
 		.then((template) => {
 			resolve({

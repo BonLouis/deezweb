@@ -1,0 +1,58 @@
+<div v-if="!$root.loading">
+	<p v-if="!mode">{{ tracks.total }} pistes</p>
+	<div v-if="$route.name === 'quickSearch'">
+		Trier par
+		<select v-model="$parent.$parent.$parent.order">
+			<option value="RANKING" selected>Les plus populaires</option>
+			<option value="ARTIST_ASC">Artiste (asc)</option>
+			<option value="ARTIST_DESC">Artiste (desc)</option>
+			<option value="ALBUM_ASC">Album (asc)</option>
+			<option value="ALBUM_DESC">Album (desc)</option>
+			<option value="TRACK_ASC">Piste (asc)</option>
+			<option value="TRACK_DESC">Piste (desc)</option>
+			<option value="DURATION_ASC">Durée la plus courte</option>
+			<option value="DURATION_DESC">Durée la plus longue</option>
+		</select>
+	</div>
+	<ul id="results">
+		<li :class="{ 'grid-for-search': !mode, 'grid-for-album': mode }">
+			<div v-for="title in titles">
+				<h3>{{ title }}</h3>
+			</div>
+		</li>
+		<li :class="{ 'grid-for-search': !mode, 'grid-for-album': mode }" v-for="data, i in tracks.data">
+			<div v-if="!mode" @mouseenter="$root.toggleShowBtn(data.id)" @mouseleave="$root.toggleShowBtn(data.id)">
+				<img :alt="`Mignature de l'album ${data.album.title}`" :src="data.album.cover_small || ''" class="search-cover-img" alt="">
+				<div class="group-btn flex align-around" v-if="$root.showBtnArray.indexOf(data.id) !== -1" >
+					<div class="play-btn" @click.prevent="$root.initWidget(data)"><i class="fa fa-play"></i></div>
+				</div>
+			</div>
+			<div v-else>
+				<div>{{ i + 1 }}</div>
+			</div>
+			<div class="fav-heart">
+				<transition name="heart-fav" mode="out-in">
+					<i key="1" v-if="`track#${data.id}` in $root.favs" title="Retirer des favoris" class="fa fa-heart " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
+					<i key="2" v-else title="Ajouter aux favoris" class="fa fa-heart-o " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
+				</transition>
+			</div>
+			<div class="ellipsis">
+				<span class="title-link" @click="$root.initWidget(data)"  @mouseenter="$root.toggleShowBtn(data.id)" @mouseleave="$root.toggleShowBtn(data.id)">{{ data.title_short }}</span>
+			</div>
+			<div  v-if="!mode" class="ellipsis" >
+				<router-link :title="`Lien vers la page de l'artiste ${data.artist.name}`" class="artist-link" :to="'/artist/' + data.artist.id">{{ data.artist.name }}</router-link>
+			</div>
+			<div v-if="!mode" class="ellipsis" >
+				<router-link :title="`Lien vers la page de l'album ${data.album.title}`" class="album-link" :to="'/album/' + data.album.id">{{ data.album.title }}</router-link>
+			</div>
+			<div class="ellipsis">
+				<span class="duration">{{ data.duration | duration }}</span>
+			</div>
+			<div class="ellipsis">
+				<span class="popularity" :title="`Popularité: ${data.rank/100000} / 10`">
+					<span v-for="n in 10" :class="data.rank / 10000 > n * 10 ? 'pop-active' : 'pop-inactive'"></span>
+				</span>
+			</div>
+		</li>
+	</ul>
+</div>

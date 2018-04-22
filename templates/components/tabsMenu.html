@@ -4,5 +4,6 @@
 	</ul>
 	<transition-group name="tab-animation" tag="section" mode="out-in">
 		<slot v-for="title in titles" :name="title" v-if="title === activeTab"></slot>
+		<slot name="fallback"></slot>
 	</transition-group>
 </div>

@@ -4,20 +4,19 @@ import {
 	searchAlbumUrl,
 	mixins,
 	isAnEmptyObject
-} from '../../js/utils.js';
+} from '../utils.js';
 
 export default Vue.component('Home', (resolve, reject) => {
 	fetch('../templates/pages/search.html')
 		.then(data => data.text())
 		.then(template => resolve({
 			name: 'search',
-			mixins: [mixins],
-			props: ['favs', 'search', 'order', 'query'],
+			props: ['favs', 'search', 'query'],
 			data: function () {
 				return {
 					searchInput: '',
 					filterInput: '',
-					orderInput: '',
+					order: '',
 					urls: {
 						searchAllUrl,
 						searchArtistUrl,
@@ -35,31 +34,11 @@ export default Vue.component('Home', (resolve, reject) => {
 				this.quickOrAdvanced();
 			},
 			methods: {
-				updateRoute() {
-					if (!this.orderInput) {
-						this.$router.push({
-							name: 'quickSearch',
-							params: {
-								search: this.searchInput || this.search,
-							}
-						});
-					} else {
-						this.$router.push({
-							name: 'quickSearchWithOrder',
-							params: {
-								search: this.searchInput || this.search,
-								order: this.orderInput || this.order
-							}
-						});
-					}
-				},
-				throwQueryError(prob, type) {
-					console.error(`${prob} should be of ${type} type.`);
-				},
+
 				makeQuickSearch() {
-					this.searchForAll();
 					this.searchForArtists();
 					this.searchForAlbums();
+					this.searchForAll();
 					this.searchInput = '';
 				},
 				searchForAll() {
@@ -75,11 +54,11 @@ export default Vue.component('Home', (resolve, reject) => {
 					} else {
 						fullSearch = this.urls.searchAllUrl.replace('query', `${search}`);
 					}
-					console.log(fullSearch);
 					fetchJsonp(fullSearch)
 						.then(data => data.json())
 						.then((data) => {
 							this.$set(this.allResults, 'all', data);
+							this.$root.loading = false;
 						});
 				},
 				searchForArtists() {
@@ -91,7 +70,6 @@ export default Vue.component('Home', (resolve, reject) => {
 					} else {
 						fullSearch = this.urls.searchArtistUrl.replace('query', `${search}`);
 					}
-					console.log(fullSearch);
 					fetchJsonp(fullSearch)
 						.then(data => data.json())
 						.then((data) => {
@@ -107,7 +85,6 @@ export default Vue.component('Home', (resolve, reject) => {
 					} else {
 						fullSearch = this.urls.searchAlbumUrl.replace('query', `${search}`);
 					}
-					console.log(fullSearch);
 					fetchJsonp(fullSearch)
 						.then(data => data.json())
 						.then((data) => {
@@ -118,17 +95,24 @@ export default Vue.component('Home', (resolve, reject) => {
 				quickOrAdvanced: function () {
 					if (isAnEmptyObject(this.$route.query) && !!this.search) {
 						this.makeQuickSearch();
-					} else if (!isAnEmptyObject(this.$route.query)) {
-						this.makeAdvancedSearch();
 					}
+					// else if (!isAnEmptyObject(this.$route.query)) {
+					// 	this.makeAdvancedSearch();
+					// }
 				},
 				checkOrder: function () {
 					// this will check for the validity of the order
 					// to make the cleanest request as possible.
 					// return false if no order are defined
-					if (!this.order) { return false; }
 
-					const order = this.orderInput || this.order;
+					// Erratum !
+					// It was usefull when using the advanced search,
+					// but as long as I have remove it, it's not very usefull anymore
+					if (!this.order) {
+						return false;
+					}
+
+					const order = this.order;
 					const validOrders = [
 						'RANKING',
 						'TRACK_ASC',
@@ -150,7 +134,25 @@ export default Vue.component('Home', (resolve, reject) => {
 					// toUpperCase for the sake of beauty.
 					// cf comments in @makeQuickSearch
 					return validOrders.indexOf((order).toUpperCase()) !== -1 ? order : defaultOrder;
-				}
+				},
+				// updateRoute() {
+				// 	if (!this.orderInput) {
+				// 		this.$router.push({
+				// 			name: 'quickSearch',
+				// 			params: {
+				// 				search: this.searchInput || this.search,
+				// 			}
+				// 		});
+				// 	} else {
+				// 		this.$router.push({
+				// 			name: 'quickSearchWithOrder',
+				// 			params: {
+				// 				search: this.searchInput || this.search,
+				// 				order: this.orderInput || this.order
+				// 			}
+				// 		});
+				// 	}
+				// },
 			},
 			watch: {
 				// All the magic happen here, because of this watcher.
@@ -159,7 +161,11 @@ export default Vue.component('Home', (resolve, reject) => {
 				// With this trick,
 				// we can handle both url's changes from the user's hand
 				// and url's changes from the form.
-				// $route: 'quickOrAdvanced'
+				$route: 'quickOrAdvanced',
+
+				// Uh,
+				// please don't watch @track-grid.html:5
+				order: 'searchForAll'
 			},
 			template,
 		}));

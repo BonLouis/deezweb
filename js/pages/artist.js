@@ -1,9 +1,7 @@
 import {
 	mixins,
 	artistUrl
-} from '../../js/utils.js';
-// import Discographie from '../locals/discographie.js';
-// debugger;
+} from '../utils.js';
 export default Vue.component('Artist', (resolve) => {
 	fetch('../templates/pages/artist.html')
 		.then(res => res.text())
@@ -44,7 +42,6 @@ export default Vue.component('Artist', (resolve) => {
 					},
 					loadArtist() {
 						this.url = this.baseUrl.replace('query', this.id);
-						console.log(this.url);
 						fetchJsonp(this.url)
 							.then(artist => artist.json())
 							.then((artist) => {
@@ -54,7 +51,6 @@ export default Vue.component('Artist', (resolve) => {
 					},
 					loadTop() {
 						const url = this.url.replace(/\?/, `/top?limit=${this.limit}&`);
-						console.log(url);
 
 						fetchJsonp(url)
 							.then(tops => tops.json())
@@ -64,7 +60,6 @@ export default Vue.component('Artist', (resolve) => {
 					},
 					loadAlbums() {
 						const url = this.url.replace(/\?/, '/albums&');
-						console.log(url);
 						fetchJsonp(url)
 							.then(albums => albums.json())
 							.then((albums) => {
@@ -73,7 +68,6 @@ export default Vue.component('Artist', (resolve) => {
 					},
 					loadSimilars() {
 						const url = this.url.replace(/\?/, '/related&');
-						console.log(url);
 						fetchJsonp(url)
 							.then(similars => similars.json())
 							.then((similars) => {

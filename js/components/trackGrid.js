@@ -1,5 +1,5 @@
 export default Vue.component('track-grid', (resolve) => {
-	fetch('../templates/locals/track-grid.html')
+	fetch('../../templates/components/track-grid.html')
 		.then(data => data.text())
 		.then((data) => {
 			resolve({

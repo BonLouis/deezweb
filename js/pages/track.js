@@ -1,4 +1,4 @@
-import { trackUrl } from '../../js/utils.js';
+import { trackUrl } from '../utils.js';
 
 export default Vue.component('Track', (resolve, reject) => {
 	fetch('../templates/pages/track.html')

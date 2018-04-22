@@ -378,10 +378,42 @@ body {
 }
 
 /* Class factory */
-.album-btn {
+.group-btn {
 	position: absolute;
 	bottom: 2rem;
 	left: 2rem;
+}
+#search-for-artists .group.btn {
+	left: inherit;
+}
+.group-btn > div {
+	transition: transform 0.1s ease-out;
+}
+.group-btn > div:hover {
+	transform: scale(1.2);
+}
+.fav-btn-round {
+    border-radius: 50%;
+    background-color: #000;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    /*color: #fff;*/
+}
+.play-btn {
+    border-radius: 50%;
+    background-color: #000;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: #fff;
+    position: relative;
 }
 .pos-r {
 	position: relative;
@@ -484,15 +516,18 @@ body {
 .w-250 {
 	width: 250px;
 }
+.ml-1 {
+	margin-left: 1rem;
+}
 .mb-1 {
 	margin-bottom: 1rem;
 }
 .mr-2{
 	margin-right: 2rem;
 }
-.fav-heart {
+.fa-heart, .fa-heart-o {
 	cursor: pointer;
-	color: red;
+	color: blue;
 }
 .search-cover-img {
 	border-radius: 5px;

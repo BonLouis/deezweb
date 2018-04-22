@@ -1,9 +1,9 @@
-import router from '../components/Router.js';
+import router from './components/Router.js';
 // Global inscription, no need to use it anywhere but in the HTML
-import tabsMenu from '../components/globals/tabsMenu.js';
-import trackGrid from '../components/globals/trackGrid.js';
-import artistGrid from '../components/globals/artistGrid.js';
-import albumGrid from '../components/globals/albumGrid.js';
+import tabsMenu from './components/globals/tabsMenu.js';
+import trackGrid from './components/globals/trackGrid.js';
+import artistGrid from './components/globals/artistGrid.js';
+import albumGrid from './components/globals/albumGrid.js';
 
 (() => {
 	const app = new Vue({
@@ -81,8 +81,8 @@ import albumGrid from '../components/globals/albumGrid.js';
 		},
 		created() {
 			for (const item in localStorage) {
-				if (/^#/.test(item)) {
-					this.favs[`${item}`] = localStorage.getItem(`#${item}`);
+				if (/#/.test(item)) {
+					this.favs[`${item}`] = localStorage.getItem(`${item}`);
 				}
 			}
 			this.initWidget();

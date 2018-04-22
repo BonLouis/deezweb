@@ -80,6 +80,7 @@ export default Vue.component('Artist', (resolve) => {
 								this.similars = similars;
 							});
 					},
+					
 				},
 				template
 			});

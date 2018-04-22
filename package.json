@@ -4,16 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "babel": "browserify main.js -o main.bundle.js -t [ babelify --presets [ '@babel/preset-env', '@babel/preset-react' ] ]"
+    "babel": "babel js_src --out-dir js_build",
+    "production": "browserify js_build/main.js -o bundle.js && uglifyjs bundle.js -c --source-map -o bundle.js",
+    "build": "rm -rf js_build && npm run babel && npm run production",
+    "serve": "http-server -o"
   },
   "author": "Louis",
   "license": "ISC",
   "dependencies": {
-    "http-server": "^0.11.1",
     "vue": "^2.5.13",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "http-server": "^0.11.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "fetch-jsonp": "^1.1.3"
   }
 }

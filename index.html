@@ -10,12 +10,9 @@
 		
 		<title>Recherche</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<script src="node_modules/babel-polyfill/dist/polyfill.min.js"></script>
-		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 		<script src="node_modules/fetch-jsonp/build/fetch-jsonp.js"></script>
 		<script src="node_modules/vue/dist/vue.js"></script>
 		<script src="node_modules/vue-router/dist/vue-router.js"></script>
-		<!-- <script src="node_modules/es6-import/dist/importer.js" import="./appStartScript.js"></script> -->
 	</head>
 	<body>
 		<div id="app">
@@ -47,7 +44,7 @@
 				</router-view>
 			</transition>
 		</div>
-		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-		<script type="text/babel" src="build/main.bundle.js"></script>
+		<script type="module" src="js_src/main.js"></script>
+		<!-- <script src="bundle.js"></script> -->
 	</body>
 </html>

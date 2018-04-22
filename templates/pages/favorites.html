@@ -1,4 +1,7 @@
 <div id="favs" v-if="!$root.loading">
-	<tabs-menu headers="Titres, Artistes, Albums"></tabs-menu>
-	<track-grid :tracks="favs"></track-grid>
+	<tabs-menu headers="titres artistes albums">
+		<track-grid :tracks="favs.tracks" slot="titres" key="a"></track-grid>
+		<artist-grid :artists="favs.artists" slot="artistes" key="b"></artist-grid>
+		<album-grid :albums="favs.albums" slot="albums" key="c"></album-grid>
+	</tabs-menu>
 </div>

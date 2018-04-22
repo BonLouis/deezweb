@@ -4,7 +4,18 @@
 		<li v-for="artist in artists.data">
 			<router-link :to="'/artist/' + artist.id">
 				<figure>
-					<img :src="artist.picture_medium" alt="" class="radius-50pc">
+					<div class="pos-r" @mouseenter="toggleShowBtn(artist.id)" @mouseleave="toggleShowBtn(artist.id)">
+						<img :src="artist.picture_medium" alt="" class="radius-50pc">
+						<div class="group-btn flex align-around" v-if="showBtnArray.indexOf(artist.id) !== -1">
+							<div class="play-btn" @click.prevent="$root.initWidget(artist)"><i class="fa fa-play"></i></div>
+							<div class="fav-btn-round ml-1" @click.prevent="$root.addOrRemoveFav(artist)">
+								<transition name="heart-fav" mode="out-in">
+									<i key="1" v-if="`artist#${artist.id}` in $root.favs" title="Retirer des favoris" class="fa fa-heart" aria-hidden="true"></i>
+									<i key="2" v-else title="Ajouter aux favoris" class="fa fa-heart-o" aria-hidden="true"></i>
+								</transition>
+							</div>
+						</div>
+					</div>
 					<figcaption>
 						<h2>{{ artist.name }}</h2>
 						<h3>{{ artist.nb_fan.toLocaleString() }} fans</h3>

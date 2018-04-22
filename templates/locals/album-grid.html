@@ -7,9 +7,14 @@
 				<figure class="w-250">
 					<div class="pos-r" @mouseenter="toggleShowBtn(album.id)" @mouseleave="toggleShowBtn(album.id)">
 						<img :src="album.cover_medium" alt="" class="radius-5px">
-						<div class="album-btn" v-if="showBtnArray.indexOf(album.id) !== -1">
-							<span class="fav-btn-round" @click.prevent="$root.addOrRemoveFav(album)">Ajouter</span>
-							<span class="play-btn" @click.prevent="$root.initWidget(album)">Jouer</span>
+						<div class="group-btn flex align-around" v-if="showBtnArray.indexOf(album.id) !== -1">
+							<div class="play-btn" @click.prevent="$root.initWidget(album)"><i class="fa fa-play"></i></div>
+							<div class="fav-btn-round ml-1" @click.prevent="$root.addOrRemoveFav(album)">
+								<transition name="heart-fav" mode="out-in">
+									<i key="1" v-if="`album#${album.id}` in $root.favs" title="Retirer des favoris" class="fa fa-heart" aria-hidden="true"></i>
+									<i key="2" v-else title="Ajouter aux favoris" class="fa fa-heart-o" aria-hidden="true"></i>
+								</transition>
+							</div>
 						</div>
 					</div>
 					<figcaption>

@@ -13,7 +13,7 @@
 			<div v-else>{{ i + 1 }}</div>
 			<div class="fav-heart">
 				<transition name="heart-fav" mode="out-in">
-					<i key="1" v-if="`#${data.id}` in $root.favs" title="Retirer des favoris" class="fa fa-heart " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
+					<i key="1" v-if="`track#${data.id}` in $root.favs" title="Retirer des favoris" class="fa fa-heart " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
 					<i key="2" v-else title="Ajouter aux favoris" class="fa fa-heart-o " @click="$root.addOrRemoveFav(data)" aria-hidden="true"></i>
 				</transition>
 			</div>

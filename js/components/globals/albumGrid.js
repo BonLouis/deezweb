@@ -15,20 +15,6 @@ export default Vue.component('album-grid', (resolve) => {
 						type: Boolean,
 						required: false
 					}
-				},
-				data: function () {
-					return {
-						showBtnArray: []
-					};
-				},
-				methods: {
-					toggleShowBtn: function(id) {
-						if (this.showBtnArray.indexOf(id) !== -1) {
-							this.showBtnArray.splice(this.showBtnArray.indexOf(id), 1);
-						} else {
-							this.showBtnArray.push(id);
-						}
-					}
 				}
 			});
 		});

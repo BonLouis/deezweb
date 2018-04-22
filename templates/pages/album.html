@@ -1,6 +1,17 @@
 <div id="album" v-if="!$root.loading">
 	<div id="album-header" class="flex">
-		<img class="mr-2" :src="album.cover_medium" alt="" @click="$root.initWidget(album)">
+		<div class="pos-r">
+			<img class="mr-2" :src="album.cover_medium" alt="" @click="$root.initWidget(album)">
+			<div class="group-btn flex align-around" v-if="$root.showBtnArray.indexOf(album.id) !== -1">
+				<div class="play-btn" @click.prevent="$root.initWidget(album)"><i class="fa fa-play"></i></div>
+				<div class="fav-btn-round ml-1" @click.prevent="$root.addOrRemoveFav(album)">
+					<transition name="heart-fav" mode="out-in">
+						<i key="1" v-if="`album#${album.id}` in $root.favs" title="Retirer des favoris" class="fa fa-heart" aria-hidden="true"></i>
+						<i key="2" v-else title="Ajouter aux favoris" class="fa fa-heart-o" aria-hidden="true"></i>
+					</transition>
+				</div>
+			</div>
+		</div>
 		<!-- <img v-if="!/artist\/\//.test(album.cover_medium)" class="mr-2" :src="album.cover_medium" alt="" @click="$root.initWidget('album', album.id)"> -->
 		<div class="flex flex-column justify-around">
 			<div>
@@ -18,5 +29,5 @@
 			</div>
 		</div>
 	</div>
-	<track-grid :tracks="album.tracks" :mode="true"></track-grid>
+<track-grid :tracks="album.tracks" :mode="true"></track-grid>
 </div>

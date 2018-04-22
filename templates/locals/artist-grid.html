@@ -4,9 +4,9 @@
 		<li v-for="artist in artists.data">
 			<router-link :to="'/artist/' + artist.id">
 				<figure>
-					<div class="pos-r" @mouseenter="toggleShowBtn(artist.id)" @mouseleave="toggleShowBtn(artist.id)">
+					<div class="pos-r" @mouseenter="$root.toggleShowBtn(artist.id)" @mouseleave="$root.toggleShowBtn(artist.id)">
 						<img :src="artist.picture_medium" alt="" class="radius-50pc">
-						<div class="group-btn flex align-around" v-if="showBtnArray.indexOf(artist.id) !== -1">
+						<div class="group-btn flex align-around justify-center" v-if="$root.showBtnArray.indexOf(artist.id) !== -1">
 							<div class="play-btn" @click.prevent="$root.initWidget(artist)"><i class="fa fa-play"></i></div>
 							<div class="fav-btn-round ml-1" @click.prevent="$root.addOrRemoveFav(artist)">
 								<transition name="heart-fav" mode="out-in">

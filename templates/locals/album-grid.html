@@ -5,9 +5,9 @@
 		<li v-for="album in albums.data">
 			<router-link :to="'/album/' + album.id" :key="album.id">
 				<figure class="w-250">
-					<div class="pos-r" @mouseenter="toggleShowBtn(album.id)" @mouseleave="toggleShowBtn(album.id)">
+					<div class="pos-r" @mouseenter="$root.toggleShowBtn(album.id)" @mouseleave="$root.toggleShowBtn(album.id)">
 						<img :src="album.cover_medium" alt="" class="radius-5px">
-						<div class="group-btn flex align-around" v-if="showBtnArray.indexOf(album.id) !== -1">
+						<div class="group-btn flex align-around" v-if="$root.showBtnArray.indexOf(album.id) !== -1">
 							<div class="play-btn" @click.prevent="$root.initWidget(album)"><i class="fa fa-play"></i></div>
 							<div class="fav-btn-round ml-1" @click.prevent="$root.addOrRemoveFav(album)">
 								<transition name="heart-fav" mode="out-in">

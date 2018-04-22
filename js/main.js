@@ -13,7 +13,8 @@ import albumGrid from './components/globals/albumGrid.js';
 		data: {
 			favs: {},
 			quickSearchInput: '',
-			loading: true
+			loading: true,
+			showBtnArray: []
 		},
 		methods: {
 			addOrRemoveFav: function (data) {
@@ -46,7 +47,7 @@ import albumGrid from './components/globals/albumGrid.js';
 				const widg = d.querySelector('#widg-target');
 				if (data) {
 					let mode;
-					let {id} = data;
+					let { id } = data;
 					if (data.type === 'artist') {
 						mode = 'radio';
 						id = `artist-${id}`;
@@ -55,7 +56,7 @@ import albumGrid from './components/globals/albumGrid.js';
 					} else {
 						mode = data.type;
 					}
-					debugger;
+
 					const oldData = widg.getAttribute('data-src');
 					let newData = oldData.replace(/(&type=)\w+(&id=)\d+/, `$1${mode}$2${id}`);
 					if (/&autoplay=false/.test(newData)) {
@@ -77,8 +78,16 @@ import albumGrid from './components/globals/albumGrid.js';
 				js.id = idl;
 				js.src = 'https://e-cdns-files.dzcdn.net/js/widget/loader.js';
 				head.appendChild(js);
+			},
+			toggleShowBtn: function (id) {
+				if (this.showBtnArray.indexOf(id) !== -1) {
+					this.showBtnArray.splice(this.showBtnArray.indexOf(id), 1);
+				} else {
+					this.showBtnArray.push(id);
+				}
 			}
 		},
+
 		created() {
 			for (const item in localStorage) {
 				if (/#/.test(item)) {

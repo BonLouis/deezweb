@@ -383,8 +383,9 @@ body {
 	bottom: 2rem;
 	left: 2rem;
 }
-#search-for-artists .group.btn {
+#search-for-artists .group-btn {
 	left: inherit;
+	width: 100%;
 }
 .group-btn > div {
 	transition: transform 0.1s ease-out;
@@ -547,12 +548,40 @@ nav {
 	bottom: 0;
 	left: 0;
 	width: var(--nav-size);
+	color: #fff;
 }
 nav + div {
 	margin-left: var(--nav-size);
 }
 #nav-wrapper {
 	padding: 1.5rem 1rem;
+}
+#nav-wrapper form {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-ms-align-items: center;
+	align-items: center;
+	justify-content: center;
+	height: 2rem;
+}
+#nav-wrapper form input {
+	border-radius: 5px 0 0 5px;
+	border: none;
+	height: 100%;
+	padding: 0rem;
+}
+
+#nav-wrapper form .fa {
+	border-radius: 0 5px 5px 0;
+	background-color: #fff;
+	height: 100%;
+	color: #000;
+}
+#nav-wrapper li a {
+	color: #c2c2ca;
 }
 form {
 	width: 100%;

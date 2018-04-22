@@ -1,26 +1,26 @@
 {
-  "name": "api-deezer-exercice",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "babel": "babel js_src --out-dir js_build",
-    "production": "browserify js_build/main.js -o bundle.js && uglifyjs bundle.js -c --source-map -o bundle.js",
-    "build": "rm -rf js_build && npm run babel && npm run production",
-    "serve": "http-server -o"
-  },
-  "author": "Louis",
-  "license": "ISC",
-  "dependencies": {
-    "vue": "^2.5.13",
-    "vue-router": "^3.0.1",
-    "http-server": "^0.11.1"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "fetch-jsonp": "^1.1.3"
-  }
+	"name": "deezapi",
+	"version": "1.0.0",
+	"description": "School project using Deezer API and Vue",
+	"repository": "https://github.com/BonLouis/deezweb",
+	"author": "Louis Bon",
+	"license": "ISC",
+	"scripts": {
+		"ri": "rm -rf node_modules && npm i",
+		"babel": "babel js --out-dir js_build",
+		"production": "browserify js_build/main.js -o bundle.js && uglifyjs bundle.js -c -o bundle.js",
+		"clean": "rm -rf js_build",
+		"build": "npm run babel && npm run production && npm run clean",
+		"serve": "npm run ri && http-server -o"
+	},
+	"dependencies": {
+		"vue": "^2.5.13",
+		"vue-router": "^3.0.1",
+		"http-server": "^0.11.1",
+		"fetch-jsonp": "^1.1.3"
+	},
+	"devDependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-preset-es2015": "^6.24.1"
+	}
 }

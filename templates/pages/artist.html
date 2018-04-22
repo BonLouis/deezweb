@@ -12,10 +12,12 @@
 						<span  class="tiny-font italic">{{ artist.nb_fan }} fans</span>
 					</div>
 					<div id="picture-side-bottom">
-						<div @click="">
-							<span class="fa fa-heart"></span>
-							<span class="fa fa-heart-o"></span>
-							<span @click="$root.addOrRemoveFav(artist)">Ajouter</span>
+						<div @click="$root.addOrRemoveFav(artist)">
+							<transition name="heart-fav" mode="out-in">
+								<i key="1" v-if="`artist#${artist.id}` in $root.favs" title="Retirer des favoris" class="fa fa-heart" aria-hidden="true"></i>
+								<i key="2" v-else title="Ajouter aux favoris" class="fa fa-heart-o" aria-hidden="true"></i>
+							</transition>
+							<span>Ajouter</span>
 						</div>
 						<div>
 							Partager
@@ -26,9 +28,9 @@
 		</div>
 	</div>
 	<tabs-menu headers="discographie, top-titres, artistes-similaires">
-		<album-grid :albums="albums" :release="true" slot="discographie" key="1"></album-grid>
-		<track-grid :tracks="tops" slot="top-titres" key="1"></track-grid>
-		<artist-grid :artists="similars" slot="artistes-similaires" key="1"></artist-grid>
-	</tabs-menu>
-	<div id="tracks"></div>
+<album-grid :albums="albums" :release="true" slot="discographie" key="1"></album-grid>
+<track-grid :tracks="tops" slot="top-titres" key="1"></track-grid>
+<artist-grid :artists="similars" slot="artistes-similaires" key="1"></artist-grid>
+</tabs-menu>
+<div id="tracks"></div>
 </div>
